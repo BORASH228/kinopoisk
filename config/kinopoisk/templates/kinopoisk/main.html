@@ -1,14 +1,25 @@
 {% extends "core/base.html" %}
 {% block title%} Home {% endblock %}
 {% block content %}
+<div class="d-flex flex-wrap justify-content-between">
 {% for movie in movies %}
+<div class="btn">
 <div class="card" style="width: 18rem;">
     <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+      <h5 class="card-title"> <span>{{movie.title}}</span></h5>
+      <p class="X">Рейтинг: <span class="text-warning">{{movie.rating}}</span></p>
+      <ul class="list-unstyled">
+        {% for ganri in movie.genres.all %}
+        <li>
+          <a href="#">{{ganri.name}} {% if not forloop.last %}, {% endif %}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      <p>{{movie.release_date}}</p>
     </div>
   </div>
 {% endfor %}
+</div>
 {% endblock %}
